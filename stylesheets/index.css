@@ -1,0 +1,14 @@
+/*http://stackoverflow.com/questions/5643254/how-to-scale-svg-image-to-fill-browser-window*/
+html, body {
+	margin:0;
+	padding:0;
+	overflow:hidden 
+}
+svg {
+	position:fixed;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	background:#eeeeee;
+}
