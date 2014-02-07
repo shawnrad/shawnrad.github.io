@@ -2,6 +2,7 @@
 	On Ready
 */
 $(document).ready(function(){
+	background_video();
 	map_controls();
 });
 
@@ -11,6 +12,17 @@ $(document).ready(function(){
 function SVG_zoom(scale){
 	fontsize = parseInt($("#svg_text").attr("font-size"));
 	$("#svg_text").attr("font-size", Math.max(1,fontsize+scale));
+}
+
+/*
+	Set background as input from camera.
+*/
+function background_video(){
+	if (hasGetUserMedia()) {
+	  
+	} else {
+	  //DO NOTHING
+	}
 }
 
 /*
@@ -28,3 +40,8 @@ function map_controls(){
         }
     });
 };
+
+/**
+* UTILITIES
+*/
+function hasGetUserMedia(){return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);}
