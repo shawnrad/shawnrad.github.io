@@ -11,9 +11,40 @@
 </head>
 <body>
 
+<div id="infobar">
+</div>
+
+<!--
 <div id="div_text">
 <img id="camp" border="0" src="http://www.w3schools.com/images/pulpit.jpg" alt="Pulpit rock">
 This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.
+</div>
+-->
+
+<div class="main">
+  <h2>Device Orientation</h2>
+  <table>
+    <tr>
+      <td>Event Supported</td>
+      <td id="doEvent"></td>
+    </tr>
+    <tr>
+      <td>Tilt Left/Right [gamma]</td>
+      <td id="doTiltLR"></td>
+    </tr>
+    <tr>
+      <td>Tilt Front/Back [beta]</td>
+      <td id="doTiltFB"></td>
+    </tr>
+    <tr>
+      <td>Direction [alpha]</td>
+      <td id="doDirection"></td>
+    </tr>
+   </table>
+</div>
+
+<div class="container" style="perspective: 300;">
+  <img src="http://www.html5rocks.com/en/tutorials/device/orientation/html5_logo.png" id="imgLogo" class="logo">
 </div>
 
 <!--
