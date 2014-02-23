@@ -49,13 +49,16 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
   // Apply the transform to the image
 
   // Some other fun rotations to try...
-  // var rotation = "rotate3d(0,1,0, "+ (tiltLR*-1)+"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
-  // var rotation = "rotate("+ tiltLR +"deg) rotate3d(0,1,0, "+ (tiltLR*-1)+"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
-
+  var rotation;
+  rotation = "rotate3d(0,1,0, "+ (tiltLR*-1)+"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+  rotation = "rotate("+ tiltLR +"deg) rotate3d(0,1,0, "+ (tiltLR*-1)+"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+  rotation = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)"; //ORIGINAL  //MOZ = "rotate("+ tiltLR +"deg)";
+  rotation = "rotate("+ dir + "deg)";
+  
   var logo = document.getElementById("imgLogo");
-  logo.style.webkitTransform = "rotate("+ dir +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
-  logo.style.MozTransform = "rotate("+ dir +"deg)";
-  logo.style.transform = "rotate("+ dir +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+  logo.style.webkitTransform = rotation;
+  logo.style.MozTransform = rotation;
+  logo.style.transform = rotation;
 }
 
 
