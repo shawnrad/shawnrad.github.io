@@ -2,51 +2,61 @@
 	On Ready
 */
 $(document).ready(function(){
-	initialization();
+	
+	init_orientation()
+	
 	background_video();
 	map_controls();
 });
 
-var count = 0;
-function initialization(){
+function init_orientation() {
 	if (!window.DeviceOrientationEvent) {
 		$("#infobar").text("DeviceOrientation is not supported").css("background","#FF6666");
 		console.warn("DeviceOrientation is not supported");
 	}
-	else{ 
-		init_orientation()
+	else{
+		var init_roll, init_pitch, init_yaw;
+		init_roll = false;
+		init_pitch = false;
+		init_yaw = false;
+		
+	
+		// Listen for the deviceorientation event and handle the raw data
+		window.addEventListener('deviceorientation',
+		function(eventData) {
+			// gamma is the left-to-right tilt in degrees, where right is positive
+			var roll = eventData.gamma;
+			// beta is the front-to-back tilt in degrees, where front is positive
+			var pitch = eventData.beta;
+			// alpha is the compass direction the device is facing in degrees
+			var yaw = eventData.alpha
+			
+			/*Capture initial yaw*/
+			if(init_yaw === false){
+				init_yaw = yaw;
+			}
+			
+			/*Adjust yaw*/
+			yaw = (yaw - init_yaw)%360
+			
+			$("#infobar").text("Yaw: "+Math.round(yaw) + " Pitch: " + Math.round(pitch) + " Roll: " + Math.round(roll));
+			
+			/*/ Apply the transform to the image
+			// Some fun rotations to try...
+			var rotation;
+			rotation = "rotate3d(0,1,0, "+ (roll*-1)+"deg) rotate3d(1,0,0, "+ (pitch*-1)+"deg)";
+			rotation = "rotate("+ roll +"deg) rotate3d(0,1,0, "+ (roll*-1)+"deg) rotate3d(1,0,0, "+ (pitch*-1)+"deg)";
+			rotation = "rotate("+ roll +"deg) rotate3d(1,0,0, "+ (pitch*-1)+"deg)"; //ORIGINAL  //MOZ = "rotate("+ roll +"deg)";
+			rotation = "rotate("+ yaw + "deg)";
+
+			var logo = document.getElementById("imgLogo");
+			logo.style.webkitTransform = rotation;
+			logo.style.MozTransform = rotation;
+			logo.style.transform = rotation;
+			*/
+		},
+		false);
 	}
-
-}
-
-function init_orientation() {
-	// Listen for the deviceorientation event and handle the raw data
-	window.addEventListener('deviceorientation',
-	function(eventData) {
-		// gamma is the left-to-right tilt in degrees, where right is positive
-		var roll = eventData.gamma;
-		// beta is the front-to-back tilt in degrees, where front is positive
-		var pitch = eventData.beta;
-		// alpha is the compass direction the device is facing in degrees
-		var yaw = eventData.alpha
-		
-		$("#infobar").text("Yaw: "+Math.round(yaw) + " Pitch: " + Math.round(pitch) + " Roll: " + Math.round(roll));
-		
-		/*/ Apply the transform to the image
-		// Some fun rotations to try...
-		var rotation;
-		rotation = "rotate3d(0,1,0, "+ (roll*-1)+"deg) rotate3d(1,0,0, "+ (pitch*-1)+"deg)";
-		rotation = "rotate("+ roll +"deg) rotate3d(0,1,0, "+ (roll*-1)+"deg) rotate3d(1,0,0, "+ (pitch*-1)+"deg)";
-		rotation = "rotate("+ roll +"deg) rotate3d(1,0,0, "+ (pitch*-1)+"deg)"; //ORIGINAL  //MOZ = "rotate("+ roll +"deg)";
-		rotation = "rotate("+ yaw + "deg)";
-
-		var logo = document.getElementById("imgLogo");
-		logo.style.webkitTransform = rotation;
-		logo.style.MozTransform = rotation;
-		logo.style.transform = rotation;
-		*/
-	},
-	false);
 }
 
 
