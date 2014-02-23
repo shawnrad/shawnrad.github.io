@@ -34,14 +34,15 @@ function init_orientation() {
 			/*Capture initial yaw*/
 			if(init_yaw === false){
 				init_yaw = yaw;
+				window.alert(init_yaw)
 			}
 			
 			/*Adjust yaw*/
-			yaw = (yaw - init_yaw)%360
+			yaw = (yaw - init_yaw);
 			
 			$("#infobar").text("Yaw: "+Math.round(yaw) + " Pitch: " + Math.round(pitch) + " Roll: " + Math.round(roll));
 			
-			/*/ Apply the transform to the image
+			// Apply the transform to the image
 			// Some fun rotations to try...
 			var rotation;
 			rotation = "rotate3d(0,1,0, "+ (roll*-1)+"deg) rotate3d(1,0,0, "+ (pitch*-1)+"deg)";
@@ -53,7 +54,7 @@ function init_orientation() {
 			logo.style.webkitTransform = rotation;
 			logo.style.MozTransform = rotation;
 			logo.style.transform = rotation;
-			*/
+			
 		},
 		false);
 	}
