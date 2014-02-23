@@ -14,51 +14,39 @@ function initialization(){
 		console.warn("DeviceOrientation is not supported");
 	}
 	else{ 
-		init()
+		init_orientation()
 	}
 
 }
 
-function init() {
-  if (window.DeviceOrientationEvent) {
-	document.getElementById("doEvent").innerHTML = "DeviceOrientation";
+function init_orientation() {
 	// Listen for the deviceorientation event and handle the raw data
-	window.addEventListener('deviceorientation', function(eventData) {
-	  // gamma is the left-to-right tilt in degrees, where right is positive
-	  var tiltLR = eventData.gamma;
-	  
-	  // beta is the front-to-back tilt in degrees, where front is positive
-	  var tiltFB = eventData.beta;
-	  
-	  // alpha is the compass direction the device is facing in degrees
-	  var dir = eventData.alpha
-	  
-	  // call our orientation event handler
-	  deviceOrientationHandler(tiltLR, tiltFB, dir);
-	  }, false);
-  } else {
-	document.getElementById("doEvent").innerHTML = "Not supported on your device or browser.  Sorry."
-  }
-}
+	window.addEventListener('deviceorientation',
+	function(eventData) {
+		// gamma is the left-to-right tilt in degrees, where right is positive
+		var roll = eventData.gamma;
+		// beta is the front-to-back tilt in degrees, where front is positive
+		var pitch = eventData.beta;
+		// alpha is the compass direction the device is facing in degrees
+		var yaw = eventData.alpha
+		
+		$("#infobar").text("Yaw: "+Math.round(yaw) + " Pitch: " + Math.round(pitch) + " Roll: " + Math.round(roll));
+		
+		/*/ Apply the transform to the image
+		// Some fun rotations to try...
+		var rotation;
+		rotation = "rotate3d(0,1,0, "+ (roll*-1)+"deg) rotate3d(1,0,0, "+ (pitch*-1)+"deg)";
+		rotation = "rotate("+ roll +"deg) rotate3d(0,1,0, "+ (roll*-1)+"deg) rotate3d(1,0,0, "+ (pitch*-1)+"deg)";
+		rotation = "rotate("+ roll +"deg) rotate3d(1,0,0, "+ (pitch*-1)+"deg)"; //ORIGINAL  //MOZ = "rotate("+ roll +"deg)";
+		rotation = "rotate("+ yaw + "deg)";
 
-function deviceOrientationHandler(tiltLR, tiltFB, dir) {
-  document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
-  document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
-  document.getElementById("doDirection").innerHTML = Math.round(dir);
-  
-  // Apply the transform to the image
-
-  // Some other fun rotations to try...
-  var rotation;
-  rotation = "rotate3d(0,1,0, "+ (tiltLR*-1)+"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
-  rotation = "rotate("+ tiltLR +"deg) rotate3d(0,1,0, "+ (tiltLR*-1)+"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
-  rotation = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)"; //ORIGINAL  //MOZ = "rotate("+ tiltLR +"deg)";
-  rotation = "rotate("+ dir + "deg)";
-  
-  var logo = document.getElementById("imgLogo");
-  logo.style.webkitTransform = rotation;
-  logo.style.MozTransform = rotation;
-  logo.style.transform = rotation;
+		var logo = document.getElementById("imgLogo");
+		logo.style.webkitTransform = rotation;
+		logo.style.MozTransform = rotation;
+		logo.style.transform = rotation;
+		*/
+	},
+	false);
 }
 
 
