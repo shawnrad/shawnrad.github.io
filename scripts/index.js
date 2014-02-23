@@ -53,9 +53,9 @@ function deviceOrientationHandler(tiltLR, tiltFB, dir) {
   // var rotation = "rotate("+ tiltLR +"deg) rotate3d(0,1,0, "+ (tiltLR*-1)+"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
 
   var logo = document.getElementById("imgLogo");
-  logo.style.webkitTransform = "rotate("+ -dir +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
-  logo.style.MozTransform = "rotate("+ -dir +"deg)";
-  logo.style.transform = "rotate("+ -dir +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+  logo.style.webkitTransform = "rotate("+ dir +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+  logo.style.MozTransform = "rotate("+ dir +"deg)";
+  logo.style.transform = "rotate("+ dir +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
 }
 
 
