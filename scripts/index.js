@@ -123,12 +123,13 @@ function background_video(){
 			video.src = window.URL.createObjectURL(stream);
 			
 			//Go Full-screen (Taken from http://www.sitepoint.com/html5-full-screen-api/)
-			video.requestFullScreen(); 			//Standard
-			video.webkitRequestFullScreen();	//Chrome/Safari
-			video.mozRequestFullScreen();		//Firefox
 			
-			console.log(video);
-			
+			if(video.requestFullScreen){ video.requestFullScreen();}					//Standard
+			else if(video.webkitRequestFullScreen){video.webkitRequestFullScreen();}	//Chrome/Safari
+			else if(video.mozRequestFullScreen){video.mozRequestFullScreen();}			//Firefox	
+			else{
+				console.warn("No fullscreen function found");
+			}
 		  }, function(e) {console.error('getUserMedia error', e);}
 		);
 
