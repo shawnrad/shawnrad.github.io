@@ -123,13 +123,7 @@ function background_video(){
 			video.src = window.URL.createObjectURL(stream);
 			
 			//Go Full-screen (Taken from http://www.sitepoint.com/html5-full-screen-api/)
-			console.log("A")
 			$(video).ready(goFullScreen);
-			console.log("B")
-			video.addEventListener("canplay", goFullScreen, false);
-			console.log("C")
-			video.addEventListener("onloadeddata", goFullScreen, false);
-			console.log("D")
 			
 		  }, function(e) {console.error('getUserMedia error', e);}
 		);
