@@ -121,11 +121,18 @@ function background_video(){
 
 		navigator.getUserMedia({audio: false, video: {mandatory:{minWidth:window.screen.availWidth, minHeight:window.screen.availHeight}}}, function(stream) {
 			video.src = window.URL.createObjectURL(stream);
+			
+			//Go Full-screen
+			RunPrefixMethod(video, "RequestFullScreen");
+			
+			video.webkitRequestFullScreen();
+			video.webkitRequestFullscreen();
 		  }, function(e) {console.error('getUserMedia error', e);}
 		);
 		
-		//Go Full-screen
-		RunPrefixMethod(video, "RequestFullScreen");
+		
+		
+		
 
 	} else {
 		$("#infobar").text("getUserMedia not supported.").css("background","#FF6666");
