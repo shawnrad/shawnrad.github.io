@@ -20,6 +20,7 @@
 This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.
 </div>
 -->
+<video autoplay></video>
 
 <div class="main">
   <h2>Device Orientation</h2>
@@ -47,7 +48,42 @@ This paragraph contains a very long word: thisisaveryveryveryveryveryverylongwor
   <img src="http://www.html5rocks.com/en/tutorials/device/orientation/html5_logo.png" id="imgLogo" class="logo">
 </div>
 
-<video autoplay></video>
+<script>
+var e = document.getElementByClass("imgLogo");
+
+e.onclick = function() {
+
+	if (RunPrefixMethod(document, "FullScreen") || RunPrefixMethod(document, "IsFullScreen")) {
+		RunPrefixMethod(document, "CancelFullScreen");
+	}
+	else {
+		RunPrefixMethod(e, "RequestFullScreen");
+	}
+
+}
+
+var pfx = ["webkit", "moz", "ms", "o", ""];
+function RunPrefixMethod(obj, method) {
+	
+	var p = 0, m, t;
+	while (p < pfx.length && !obj[m]) {
+		m = method;
+		if (pfx[p] == "") {
+			m = m.substr(0,1).toLowerCase() + m.substr(1);
+		}
+		m = pfx[p] + m;
+		t = typeof obj[m];
+		if (t != "undefined") {
+			pfx = [pfx[p]];
+			return (t == "function" ? obj[m]() : obj[m]);
+		}
+		p++;
+	}
+
+}
+</script>
+
+
 
 
 <!--

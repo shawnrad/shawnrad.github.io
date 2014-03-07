@@ -122,17 +122,15 @@ function background_video(){
 		navigator.getUserMedia({audio: false, video: {mandatory:{minWidth:window.screen.availWidth, minHeight:window.screen.availHeight}}}, function(stream) {
 			video.src = window.URL.createObjectURL(stream);
 			
-			//Go Full-screen
-			RunPrefixMethod(video, "RequestFullScreen");
+			//Go Full-screen (Taken from http://www.sitepoint.com/html5-full-screen-api/)
+			video.requestFullScreen(); 			//Standard
+			video.webkitRequestFullScreen();	//Chrome/Safari
+			video.mozRequestFullScreen();		//Firefox
 			
-			video.webkitRequestFullScreen();
-			video.webkitRequestFullscreen();
+			console.log(video);
+			
 		  }, function(e) {console.error('getUserMedia error', e);}
 		);
-		
-		
-		
-		
 
 	} else {
 		$("#infobar").text("getUserMedia not supported.").css("background","#FF6666");
@@ -144,23 +142,3 @@ function background_video(){
 * UTILITIES
 */
 function hasGetUserMedia(){return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);}
-
-//Taken from http://www.sitepoint.com/html5-full-screen-api/
-
-function RunPrefixMethod(obj, method) {
-	var p = 0, m, t;
-	var pfx = ["webkit", "moz", "ms", "o", ""];
-	while (p < pfx.length && !obj[m]) {
-		m = method;
-		if (pfx[p] == "") {
-			m = m.substr(0,1).toLowerCase() + m.substr(1);
-		}
-		m = pfx[p] + m;
-		t = typeof obj[m];
-		if (t != "undefined") {
-			pfx = [pfx[p]];
-			return (t == "function" ? obj[m]() : obj[m]);
-		}
-		p++;
-	}
-}
