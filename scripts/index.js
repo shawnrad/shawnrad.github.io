@@ -110,7 +110,19 @@ function map_controls(){
 */
 function background_video(){
 	if (hasGetUserMedia()) {
-		//DO SOMETHING WITH GETUSERMEDIA
+		
+		navigator.getUserMedia = navigator.getUserMedia ||
+                          navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia ||
+                          navigator.msGetUserMedia;
+
+		var video = document.querySelector('video');
+
+		navigator.getUserMedia({audio: true, video: true}, function(stream) {
+			video.src = window.URL.createObjectURL(stream);
+		  }, function(e) {console.error('getUserMedia error', e);}
+		);
+		
 	} else {
 		$("#infobar").text("getUserMedia not supported.").css("background","#FF6666");
 		console.warn("getUserMedia is not supported");
