@@ -33,7 +33,7 @@ mg{
 
 video{
 	position:absolute;
-	/*z-index:-1;*/
+	z-index:-1;
 	top:0px;
 	left:0px;
 	
