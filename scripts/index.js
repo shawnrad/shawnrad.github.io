@@ -122,8 +122,11 @@ function background_video(){
 		navigator.getUserMedia({audio: false, video: {mandatory:{minWidth:window.screen.availWidth, minHeight:window.screen.availHeight}}}, function(stream) {
 			video.src = window.URL.createObjectURL(stream);
 			
-			//Go Full-screen (Taken from http://www.sitepoint.com/html5-full-screen-api/)
-			$(video).ready(goFullScreen);
+			
+			$(video).ready(function(){
+				RunPrefixMethod(video, "RequestFullScreen");
+			});
+			
 			
 		  }, function(e) {console.error('getUserMedia error', e);}
 		);
@@ -139,6 +142,27 @@ function background_video(){
 */
 function hasGetUserMedia(){return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);}
 
+//Go Full-screen (Taken from http://www.sitepoint.com/html5-full-screen-api/)
+var pfx = ["webkit", "moz", "ms", "o", ""];
+function RunPrefixMethod(obj, method) {
+	
+	var p = 0, m, t;
+	while (p < pfx.length && !obj[m]) {
+		m = method;
+		if (pfx[p] == "") {
+			m = m.substr(0,1).toLowerCase() + m.substr(1);
+		}
+		m = pfx[p] + m;
+		t = typeof obj[m];
+		if (t != "undefined") {
+			pfx = [pfx[p]];
+			return (t == "function" ? obj[m]() : obj[m]);
+		}
+		p++;
+	}
+
+}
+/*
 function goFullScreen(){
 	var video = document.querySelector('video');
 	
@@ -147,3 +171,4 @@ function goFullScreen(){
 	else if(video.mozRequestFullScreen){video.mozRequestFullScreen();console.log("Firefox");}			//Firefox	
 	else{ console.warn("No fullscreen function found");}
 }
+*/
