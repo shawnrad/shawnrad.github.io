@@ -119,7 +119,7 @@ function background_video(){
 		
 		var video = document.querySelector('video');
 
-		navigator.getUserMedia({audio: false, video: {mandatory:{minWidth:window.screen.availWidth, minHeight:win.screen.availHeight}}}, function(stream) {
+		navigator.getUserMedia({audio: false, video: {mandatory:{minWidth:window.screen.availWidth, minHeight:window.screen.availHeight}}}, function(stream) {
 			video.src = window.URL.createObjectURL(stream);
 		  }, function(e) {console.error('getUserMedia error', e);}
 		);
