@@ -145,6 +145,8 @@ function background_video(){
 function hasGetUserMedia(){return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);}
 
 function goFullScreen(){
+	var video = document.querySelector('video');
+	
 	if(video.requestFullScreen){ video.requestFullScreen();}					//Standard
 	else if(video.webkitRequestFullScreen){video.webkitRequestFullScreen();}	//Chrome/Safari
 	else if(video.mozRequestFullScreen){video.mozRequestFullScreen();}			//Firefox	
