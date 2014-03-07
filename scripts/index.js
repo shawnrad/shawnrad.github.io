@@ -124,12 +124,12 @@ function background_video(){
 			
 			//Go Full-screen (Taken from http://www.sitepoint.com/html5-full-screen-api/)
 			
-			if(video.requestFullScreen){ video.requestFullScreen();}					//Standard
-			else if(video.webkitRequestFullScreen){video.webkitRequestFullScreen();}	//Chrome/Safari
-			else if(video.mozRequestFullScreen){video.mozRequestFullScreen();}			//Firefox	
-			else{
-				console.warn("No fullscreen function found");
-			}
+			$(video).ready(goFullScreen);
+			
+			video.addEventListener("canplay", goFullScreen, false);
+			video.addEventListener("onloadeddata", goFullScreen, false);
+			
+			
 		  }, function(e) {console.error('getUserMedia error', e);}
 		);
 
@@ -143,3 +143,10 @@ function background_video(){
 * UTILITIES
 */
 function hasGetUserMedia(){return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);}
+
+function goFullScreen(){
+	if(video.requestFullScreen){ video.requestFullScreen();}					//Standard
+	else if(video.webkitRequestFullScreen){video.webkitRequestFullScreen();}	//Chrome/Safari
+	else if(video.mozRequestFullScreen){video.mozRequestFullScreen();}			//Firefox	
+	else{ console.warn("No fullscreen function found");}
+}
