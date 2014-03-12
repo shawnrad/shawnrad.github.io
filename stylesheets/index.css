@@ -39,7 +39,7 @@ html, body {
 
 video{
 	position:absolute;
-	z-index:-1;
+	z-index:0;
 	top:0px;
 	left:0px;
 	

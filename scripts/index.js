@@ -118,7 +118,7 @@ function CSS_zoom(selector, scale) {
 */
 function init_controls(){    
     
-	$("#div_text").draggable().zoomable();
+	$("#div_text").draggable({containment:"window", scroll:false}).zoomable();
 };
 
 
