@@ -3,7 +3,7 @@
 <head>
 <!-- SCRIPTS -->
 <script src="scripts/jquery-2.1.0.min.js"></script>
-<script src="scripts/lorum_ipsum.js"></script>
+<script src="scripts/jquery-ui.min.js"></script>
 <script src="scripts/index.js"></script>
 <!-- STYLE -->
 <link rel="stylesheet" type="text/css" href="stylesheets/index.css">
@@ -11,46 +11,16 @@
 </head>
 <body>
 
-<div id="infobar">
-</div>
+<div id="infobar" class="infobar"></div>
+<button id="hide_infobar" class="infobar" onclick="dbug(false)">Hide</button>
+<button id="show_infobar" onclick="dbug(true)">Debug</button>
 
-<!--
-<div id="div_text">
+<video id="background-video" autoplay></video>
+
+<div id="div_text" tabindex=-1>
 <img id="camp" border="0" src="http://www.w3schools.com/images/pulpit.jpg" alt="Pulpit rock">
 This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.
 </div>
--->
-<video autoplay></video>
-
-<div class="main">
-  <h2>Device Orientation</h2>
-  <table>
-    <tr>
-      <td>Event Supported</td>
-      <td id="doEvent"></td>
-    </tr>
-    <tr>
-      <td>Tilt Left/Right [gamma]</td>
-      <td id="doTiltLR"></td>
-    </tr>
-    <tr>
-      <td>Tilt Front/Back [beta]</td>
-      <td id="doTiltFB"></td>
-    </tr>
-    <tr>
-      <td>Direction [alpha]</td>
-      <td id="doDirection"></td>
-    </tr>
-   </table>
-</div>
-
-<div class="container" style="perspective: 300;">
-  <img src="http://www.html5rocks.com/en/tutorials/device/orientation/html5_logo.png" id="imgLogo" class="logo">
-</div>
-
-<!--
-<p id="p_text">This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.</p>
--->
 
 </body>
 </html>

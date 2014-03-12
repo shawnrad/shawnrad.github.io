@@ -1,4 +1,3 @@
-/*
 html, body {
 	height:100%;
 	width:100%;
@@ -7,9 +6,14 @@ html, body {
 	padding:0;
 	overflow:hidden;
 	
+	background-image:url("../media/box3.jpg");
 }
 
-div{
+#div_text{
+	position: absolute;
+	left:0px;
+	top:0px;
+	
 	width:10em;
 	height:10em;
 	
@@ -19,17 +23,19 @@ div{
 	border:1px solid #000000;
 	overflow:hidden;
 	
+	background:white;
+	
 	transform: scale(1,1);
-	-ms-transform: scale(1,1); /* IE 9 //
-	-webkit-transform: scale(1,1); /* Safari and Chrome //
+	-ms-transform: scale(1,1); /* IE 9 /*/
+	-webkit-transform: scale(1,1); /* Safari and Chrome /*/
 }
 
-mg{
+#camp{
 	position:relative;
 	height:33%;
 	width:100%;
 }
-*/
+
 
 video{
 	position:absolute;
@@ -39,37 +45,7 @@ video{
 	
 	min-width:100%;
 	min-height:100%;
-}
-
-/* DEMO STYLE*/
-body {
-  font-family: sans-serif;
-}
-
-.main {
-  border: 1px solid black;
-  box-shadow: 10px 10px 5px #888;
-  border-radius: 12px;
-  padding: 20px;
-  background-color: #ddd;
-  margin: 25px;
-  width: 450px;
-  margin-left:auto;
-  margin-right:auto;  
-}
-
-.logo {
-  width:275px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  padding: 15px;
-}
-
-.container {
-  -webkit-perspective: 300; perspective: 300;
-}
-  
+} 
   
 #infobar{
 	width:100%;
@@ -84,4 +60,10 @@ body {
 	
 	font-size:1em;
 	text-align:center;
+}
+
+#show_infobar, #hide_infobar{
+	position:absolute;
+	right:0px;
+	z-index:2;
 }

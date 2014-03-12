@@ -2,11 +2,18 @@
 	On Ready
 */
 $(document).ready(function(){
+	dbug(false);
 	
-	init_orientation()
-	background_video();
+	if(!init_orientation()){
+		//return;
+	}
 	
-	map_controls();
+	init_controls();
+	
+	if(!init_background_video()){
+		$("video").hide();
+	}
+	
 });
 
 /* Adjust with orientation data */
@@ -14,6 +21,7 @@ function init_orientation() {
 	if (!window.DeviceOrientationEvent) {
 		$("#infobar").text("DeviceOrientation is not supported").css("background","#FF6666");
 		console.warn("DeviceOrientation is not supported");
+		return false;
 	}
 	else{
 		var init_roll, init_pitch, init_yaw;
@@ -65,50 +73,59 @@ function init_orientation() {
 /*
 	Increase/Decrease by CSS
 */
+/*TODO: Set z-index based on scale (NUM = SCALE/0.2, implies default = 5)*/
 function CSS_zoom(selector, scale) {
 	var MIN_SCALE = 0.2;
 	
 	try {
-		matrix = $.map($(selector).css("transform").split("(")[1].split(")")[0].split(","), function(el,index){return parseFloat(el);});
-		$(selector).css("transform", "scale("+Math.max(MIN_SCALE,matrix[0] + scale)+","+Math.max(MIN_SCALE,matrix[3] + scale)+")");
+		if($(selector).css("transform")=="none"||$(selector).css("transform")==undefined){
+			$(selector).css("transform", "scale("+Math.max(MIN_SCALE,scale)+","+Math.max(MIN_SCALE,scale)+")");
+		}
+		else{
+			matrix = $.map($(selector).css("transform").split("(")[1].split(")")[0].split(","), function(el,index){return parseFloat(el);});
+			$(selector).css("transform", "scale("+Math.max(MIN_SCALE,matrix[0] + scale)+","+Math.max(MIN_SCALE,matrix[3] + scale)+")");
+		}
 	}
 	catch(err){/*CSS3 not supported*/}
   
 	try {
-		matrix = $.map($(selector).css("-ms-transform").split("(")[1].split(")")[0].split(","), function(el,index){return parseFloat(el);});
-		$(selector).css("-ms-transform", "scale("+Math.max(MIN_SCALE,matrix[0] + scale)+","+Math.max(MIN_SCALE,matrix[3] + scale)+")");
+		if($(selector).css("-ms-transform")=="none"||$(selector).css("-ms-transform")==undefined){
+			$(selector).css("-ms-transform", "scale("+Math.max(MIN_SCALE,scale)+","+Math.max(MIN_SCALE,scale)+")");
+		}
+		else{
+			matrix = $.map($(selector).css("-ms-transform").split("(")[1].split(")")[0].split(","), function(el,index){return parseFloat(el);});
+			$(selector).css("-ms-transform", "scale("+Math.max(MIN_SCALE,matrix[0] + scale)+","+Math.max(MIN_SCALE,matrix[3] + scale)+")");
+		}
 	}
 	catch(err){/* not IE9 */}
 	
 	try {
-		matrix = $.map($(selector).css("-webkit-transform").split("(")[1].split(")")[0].split(","), function(el,index){return parseFloat(el);});
-		$(selector).css("-webkit-transform", "scale("+Math.max(MIN_SCALE,matrix[0] + scale)+","+Math.max(MIN_SCALE,matrix[3] + scale)+")");
+		if($(selector).css("-webkit-transform")=="none"||$(selector).css("-webkit-transform")==undefined){
+			$(selector).css("-webkit-transform", "scale("+Math.max(MIN_SCALE,scale)+","+Math.max(MIN_SCALE,scale)+")");
+		}
+		else{
+			matrix = $.map($(selector).css("-webkit-transform").split("(")[1].split(")")[0].split(","), function(el,index){return parseFloat(el);});
+			$(selector).css("-webkit-transform", "scale("+Math.max(MIN_SCALE,matrix[0] + scale)+","+Math.max(MIN_SCALE,matrix[3] + scale)+")");
+		}
 	}
 	catch(err){/* Safari and Chrome */}
 }
 
 
+
 /*
-	Map keypresses to actions
+	Map controls to DOM elements
 */
-function map_controls(){    
-    $(document).keypress(function (event) {
-        switch (event.charCode) {
-            case (50): // 2
-                CSS_zoom("div",-.2);
-                break;
-            case (56): // 8
-                CSS_zoom("div",.2);
-                break;
-        }
-    });
+function init_controls(){    
+    
+	$("#div_text").draggable().zoomable();
 };
 
 
 /*
 	Set background as input from camera.
 */
-function background_video(){
+function init_background_video(){
 	if (hasGetUserMedia()) {
 		
 		navigator.getUserMedia = navigator.getUserMedia ||
@@ -128,12 +145,52 @@ function background_video(){
 			
 		  }, function(e) {console.error('getUserMedia error', e);}
 		);
-
+		
+		return true;
 	} else {
 		$("#infobar").text("getUserMedia not supported.").css("background","#FF6666");
 		console.warn("getUserMedia is not supported");
+		return false;
 	}
 }
+
+function dbug(debugging){
+	if(debugging){
+		$(".infobar").show();
+		$("#show_infobar").hide();
+	}
+	else{
+		$(".infobar").hide();
+		$("#show_infobar").show();
+	}
+}
+
+/*Zoomable Jquery Plugin Source: http://learn.jquery.com/plugins/basic-plugin-creation/*/
+(function( $ ) {
+    $.fn.zoomable = function() {
+		/*BEGIN FUNCTION*/
+        return this.each(function() {
+			/*MOUSE SCROLL Source: http://blogs.sitepointstatic.com/examples/tech/mouse-wheel/index.html*/
+			function MouseWheelHandler(e) {
+				// Cross-browser wheel delta
+				var e = window.event || e; // old IE support
+				var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+				CSS_zoom(this, delta*0.2)
+			}
+			
+            if (this.addEventListener) {
+				// IE9, Chrome, Safari, Opera
+				this.addEventListener("mousewheel", MouseWheelHandler, false);
+				// Firefox
+				this.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
+			}
+			// IE 6/7/8
+			else{
+				this.attachEvent("onmousewheel", MouseWheelHandler);
+			}
+        });/*END FUNCTION*/
+    };
+}( jQuery ));
 
 /**
 * UTILITIES
