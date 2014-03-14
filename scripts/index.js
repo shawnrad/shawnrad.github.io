@@ -10,10 +10,11 @@ $(document).ready(function(){
 	
 	init_controls();
 	
+	/*
 	if(!init_background_video()){
 		$("video").hide();
 	}
-	
+	*/
 });
 
 /* Adjust with orientation data */
