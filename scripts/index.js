@@ -69,21 +69,6 @@ function init_orientation() {
 	}
 }
 
-function round(val) {
-	//Round to nearest 0.5
-	return Math.floor(val) + (0.5*Math.round(val%1))
-	
-	//var amt = 10;
-	//return Math.round(val * amt) /  amt;
-}
-
-function cart_to_pol(x,y,z){
-	r = Math.pow((Math.pow(x,2) + Math.pow(y,2) + Math.pow(z,2)), 0.5);
-	theta = Math.atan2(z, Math.pow((Math.pow(x) + Math.pow(y)), .5));
-	phi = Math.atan2(y, x);
-	return [r, theta, phi];
-}
-
 /* Adjust with motion data */
 function init_motion(){
 	if (!window.DeviceMotionEvent) {
@@ -95,29 +80,22 @@ function init_motion(){
 		// Listen for the deviceorientation event and handle the raw data
 		window.addEventListener('devicemotion',
 			function deviceMotionHandler(eventData) {
-			var info, xyz = "[X, Y, Z]";
-
+			
 			var acceleration = eventData.acceleration;
 			var polar = cart_to_pol(acceleration.x, acceleration.y, acceleration.z)
 			acceleration.r = polar[0]
 			acceleration.theta = polar[1]
 			acceleration.phi = polar[2]
-			console.log(acceleration)
-			
 			var rotation = eventData.rotationRate;
 			
-			// Grab the acceleration including gravity from the results
-			info = xyz.replace("X", round(acceleration.x));
-			info = info.replace("Y", round(acceleration.y));
-			info = info.replace("Z", round(acceleration.z));
-			document.getElementById("moAccel").innerHTML = info;
-
-			info = xyz.replace("X", round(acceleration.r));
-			info = info.replace("Y", round(acceleration.theta));
-			info = info.replace("Z", round(acceleration.phi));
-			document.getElementById("poAccel").innerHTML = info;
-			
-			$("#infobar").text("X: "+Math.round(acceleration.x) + " Y: " + Math.round(acceleration.y) + " Z: " + Math.round(acceleration.z));
+			$("#infobar").text("(X, Y, Z): [" +
+			Math.round(acceleration.x) + ", " +
+			Math.round(acceleration.y) + ", " +
+			Math.round(acceleration.z) + "] <---> " +
+			"(R, \u03B8, \u03C6) [" + 
+			Math.round(acceleration.r) +  ", " +
+			Math.round(acceleration.theta) + ", " +
+			Math.round(acceleration.phi) + "]");
 			
 			},
 		false);
@@ -233,7 +211,17 @@ function dbug(debugging){
 				CSS_zoom(this, delta*0.2)
 			}
 			
+			/* DEVICE MOTION Source: */
+			function DeviceMotionHandler(e) {
+				var acceleration = e.acceleration;
+				
+				if(Math.abs(acceleration.z)>2){
+					CSS_zoom(this, round(acceleration.z)*0.5)
+				}
+			}
+			
 			$(this).mousedown(function(){
+				
 				if (this.addEventListener) {
 					// IE9, Chrome, Safari, Opera
 					this.addEventListener("mousewheel", MouseWheelHandler, false);
@@ -243,6 +231,10 @@ function dbug(debugging){
 				// IE 6/7/8
 				else{
 					this.attachEvent("onmousewheel", MouseWheelHandler);
+				}
+				
+				if (window.DeviceMotionEvent) {
+					window.addEventListener('devicemotion', DeviceMotionHandler, false);
 				}
 			});
 			
@@ -257,6 +249,10 @@ function dbug(debugging){
 				else{
 					this.detachEvent("onmousewheel", MouseWheelHandler);
 				}
+				
+				if (window.DeviceMotionEvent) {
+					window.removeEventListener('devicemotion',DeviceMotionHandler,false);
+				}
 			})
 				
             
@@ -268,3 +264,13 @@ function dbug(debugging){
 * UTILITIES
 */
 function hasGetUserMedia(){return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);}
+
+function cart_to_pol(x,y,z){ return [Math.pow((Math.pow(x,2) + Math.pow(y,2) + Math.pow(z,2)), 0.5), Math.atan2(z, Math.pow((Math.pow(x) + Math.pow(y)), .5)), Math.atan2(y, x)];}
+
+function round(val) {
+	//Round to nearest 0.5
+	return Math.floor(val) + (0.5*Math.round(val%1))
+	
+	//Round to nearest tenth
+	//return Math.round(val * 10) /  10;
+}
