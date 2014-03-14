@@ -70,7 +70,8 @@ function init_orientation() {
 }
 
 function round(val) {
-	return val;
+	//Round to nearest 0.5
+	return Math.floor(x) + (0.5*Math.round(x%1))}
 	
 	var amt = 10;
 	return Math.round(val * amt) /  amt;
@@ -223,6 +224,7 @@ function dbug(debugging){
     $.fn.zoomable = function() {
 		/*BEGIN FUNCTION*/
         return this.each(function() {
+			
 			/*MOUSE SCROLL Source: http://blogs.sitepointstatic.com/examples/tech/mouse-wheel/index.html*/
 			function MouseWheelHandler(e) {
 				// Cross-browser wheel delta
@@ -231,16 +233,33 @@ function dbug(debugging){
 				CSS_zoom(this, delta*0.2)
 			}
 			
-            if (this.addEventListener) {
-				// IE9, Chrome, Safari, Opera
-				this.addEventListener("mousewheel", MouseWheelHandler, false);
-				// Firefox
-				this.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
-			}
-			// IE 6/7/8
-			else{
-				this.attachEvent("onmousewheel", MouseWheelHandler);
-			}
+			$(this).mousedown(function(){
+				if (this.addEventListener) {
+					// IE9, Chrome, Safari, Opera
+					this.addEventListener("mousewheel", MouseWheelHandler, false);
+					// Firefox
+					this.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
+				}
+				// IE 6/7/8
+				else{
+					this.attachEvent("onmousewheel", MouseWheelHandler);
+				}
+			});
+			
+			$(this).mouseup(function(){
+				if (this.addEventListener) {
+					// IE9, Chrome, Safari, Opera
+					this.removeEventListener("mousewheel", MouseWheelHandler, false);
+					// Firefox
+					this.removeEventListener("DOMMouseScroll", MouseWheelHandler, false);
+				}
+				// IE 6/7/8
+				else{
+					this.detachEvent("onmousewheel", MouseWheelHandler);
+				}
+			})
+				
+            
         });/*END FUNCTION*/
     };
 }( jQuery ));
