@@ -202,13 +202,14 @@ function dbug(debugging){
     $.fn.zoomable = function() {
 		/*BEGIN FUNCTION*/
         return this.each(function() {
+			var object = this;
 			
 			/*MOUSE SCROLL Source: http://blogs.sitepointstatic.com/examples/tech/mouse-wheel/index.html*/
 			function MouseWheelHandler(e) {
 				// Cross-browser wheel delta
 				var e = window.event || e; // old IE support
 				var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-				CSS_zoom(this, delta*0.2)
+				CSS_zoom(object, delta*0.2);
 			}
 			
 			/* DEVICE MOTION Source: */
@@ -216,7 +217,8 @@ function dbug(debugging){
 				var acceleration = e.acceleration;
 				
 				if(Math.abs(acceleration.z)>2){
-					CSS_zoom(this, round(acceleration.z)*0.5)
+					CSS_zoom(object, round(acceleration.z)*0.5);
+					console.log("ZOOM FROM MOTION");
 				}
 			}
 			
