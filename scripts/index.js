@@ -117,7 +117,7 @@ function init_motion(){
 			$("#infobar_sparkline").sparkline(z_acceleration);
 			if(acceleration.z < z_min){z_min = accerlaration.z}
 			if(acceleration.z > z_max){z_max = accerlaration.z}
-			$("#infobar_minmax").text("MIN: "+z_min+", MAX: "+z_max);
+			$("#infobar_text").text("MIN: "+z_min+", MAX: "+z_max);
 			
 			},
 		false);
