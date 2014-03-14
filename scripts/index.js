@@ -19,7 +19,7 @@ $(document).ready(function(){
 /* Adjust with orientation data */
 function init_orientation() {
 	if (!window.DeviceOrientationEvent) {
-		$("#infobar").text("DeviceOrientation is not supported").css("background","#FF6666");
+		$("#infobar_text").text("DeviceOrientation is not supported").css("background","#FF6666");
 		console.warn("DeviceOrientation is not supported");
 		return false;
 	}
@@ -49,7 +49,7 @@ function init_orientation() {
 			yaw = (yaw - init_yaw + 360)%360;
 			
 			
-			$("#infobar").text("Yaw: "+Math.round(yaw) + " Pitch: " + Math.round(pitch) + " Roll: " + Math.round(roll));
+			$("#infobar_text").text("Yaw: "+Math.round(yaw) + " Pitch: " + Math.round(pitch) + " Roll: " + Math.round(roll));
 			
 			/*/ Apply the transform to the image
 			// Some fun rotations to try...
@@ -78,7 +78,7 @@ function init_motion(){
 	}
 	
 	if (!window.DeviceMotionEvent) {
-		$("#infobar").text("DeviceMotion is not supported").css("background","#FF6666");
+		$("#infobar_text").text("DeviceMotion is not supported").css("background","#FF6666");
 		console.warn("DeviceMotion is not supported");
 		return false;
 	}
@@ -190,7 +190,7 @@ function init_background_video(){
 		
 		return true;
 	} else {
-		$("#infobar").text("getUserMedia not supported.").css("background","#FF6666");
+		$("#infobar_text").text("getUserMedia not supported.").css("background","#FF6666");
 		console.warn("getUserMedia is not supported");
 		return false;
 	}
