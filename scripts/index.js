@@ -71,6 +71,12 @@ function init_orientation() {
 
 /* Adjust with motion data */
 function init_motion(){
+	//Fill my queue
+	var z_acceleration = []
+	for(var i = 0; i<100; i++){
+		z_acceleration.push(0);
+	}
+	
 	if (!window.DeviceMotionEvent) {
 		$("#infobar").text("DeviceMotion is not supported").css("background","#FF6666");
 		console.warn("DeviceMotion is not supported");
@@ -88,7 +94,7 @@ function init_motion(){
 			acceleration.phi = polar[2]
 			var rotation = eventData.rotationRate;
 			
-			$("#infobar").text("(X, Y, Z): [" +
+			$("#infobar_text").text("(X, Y, Z): [" +
 			Math.round(acceleration.x) + ", " +
 			Math.round(acceleration.y) + ", " +
 			Math.round(acceleration.z) + "] <---> " +
@@ -96,6 +102,10 @@ function init_motion(){
 			Math.round(acceleration.r) +  ", " +
 			Math.round(acceleration.theta) + ", " +
 			Math.round(acceleration.phi) + "]");
+			
+			z_acceleration.push(acceleration.z);
+			z_acceleration.shift();
+			$("#infobar_sparkline").sparkline(z_acceleration);
 			
 			},
 		false);
@@ -203,6 +213,7 @@ function dbug(debugging){
 		/*BEGIN FUNCTION*/
         return this.each(function() {
 			var object = this;
+			var count = 0;
 			
 			/*MOUSE SCROLL Source: http://blogs.sitepointstatic.com/examples/tech/mouse-wheel/index.html*/
 			function MouseWheelHandler(e) {
@@ -216,9 +227,8 @@ function dbug(debugging){
 			function DeviceMotionHandler(e) {
 				var acceleration = e.acceleration;
 				
-				if(Math.abs(acceleration.z)>2){
-					CSS_zoom(object, round(acceleration.z)*0.5);
-					console.log("ZOOM FROM MOTION");
+				if(Math.abs(acceleration.z)>3){
+					CSS_zoom(object, round(acceleration.z)*0.1);
 				}
 			}
 			
