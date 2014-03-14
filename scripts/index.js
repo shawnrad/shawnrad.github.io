@@ -83,6 +83,8 @@ function init_motion(){
 	for(var i = 0; i<100; i++){
 		z_acceleration.push(0);
 	}
+	var z_min = 0;
+	var z_max = 0;
 	
 	if (!window.DeviceMotionEvent) {
 		$("#infobar_text").text("DeviceMotion is not supported").css("background","#FF6666");
@@ -113,6 +115,9 @@ function init_motion(){
 			z_acceleration.push(acceleration.z);
 			z_acceleration.shift();
 			$("#infobar_sparkline").sparkline(z_acceleration);
+			if(acceleration.z > z_max){z_max = accerlaration.z}
+			if(acceleration.z < z_min){z_min = accerlaration.z}
+			$("#infobar_minmax").sparkline("MIN: "+z_min+", MAX: "+z_max);
 			
 			},
 		false);
