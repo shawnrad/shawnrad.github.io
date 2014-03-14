@@ -71,10 +71,10 @@ function init_orientation() {
 
 function round(val) {
 	//Round to nearest 0.5
-	return Math.floor(x) + (0.5*Math.round(x%1))}
+	return Math.floor(val) + (0.5*Math.round(val%1))
 	
-	var amt = 10;
-	return Math.round(val * amt) /  amt;
+	//var amt = 10;
+	//return Math.round(val * amt) /  amt;
 }
 
 function cart_to_pol(x,y,z){
