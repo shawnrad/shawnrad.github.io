@@ -2,9 +2,9 @@
 	On Ready
 */
 $(document).ready(function(){
-	dbug(false);
+	dbug(true);
 	
-	if(!init_orientation()){
+	if(!init_motion()){
 		//return;
 	}
 	
@@ -69,6 +69,59 @@ function init_orientation() {
 	}
 }
 
+function round(val) {
+	return val;
+	
+	var amt = 10;
+	return Math.round(val * amt) /  amt;
+}
+
+function cart_to_pol(x,y,z){
+	r = Math.pow((Math.pow(x,2) + Math.pow(y,2) + Math.pow(z,2)), 0.5);
+	theta = Math.atan2(z, Math.pow((Math.pow(x) + Math.pow(y)), .5));
+	phi = Math.atan2(y, x);
+	return [r, theta, phi];
+}
+
+/* Adjust with motion data */
+function init_motion(){
+	if (!window.DeviceMotionEvent) {
+		$("#infobar").text("DeviceMotion is not supported").css("background","#FF6666");
+		console.warn("DeviceMotion is not supported");
+		return false;
+	}
+	else{
+		// Listen for the deviceorientation event and handle the raw data
+		window.addEventListener('devicemotion',
+			function deviceMotionHandler(eventData) {
+			var info, xyz = "[X, Y, Z]";
+
+			var acceleration = eventData.acceleration;
+			var polar = cart_to_pol(acceleration.x, acceleration.y, acceleration.z)
+			acceleration.r = polar[0]
+			acceleration.theta = polar[1]
+			acceleration.phi = polar[2]
+			console.log(acceleration)
+			
+			var rotation = eventData.rotationRate;
+			
+			// Grab the acceleration including gravity from the results
+			info = xyz.replace("X", round(acceleration.x));
+			info = info.replace("Y", round(acceleration.y));
+			info = info.replace("Z", round(acceleration.z));
+			document.getElementById("moAccel").innerHTML = info;
+
+			info = xyz.replace("X", round(acceleration.r));
+			info = info.replace("Y", round(acceleration.theta));
+			info = info.replace("Z", round(acceleration.phi));
+			document.getElementById("poAccel").innerHTML = info;
+			
+			$("#infobar").text("X: "+Math.round(acceleration.x) + " Y: " + Math.round(acceleration.y) + " Z: " + Math.round(acceleration.z));
+			
+			},
+		false);
+	}
+}
 
 /*
 	Increase/Decrease by CSS
