@@ -10,12 +10,18 @@ $(document).ready(function(){
 	
 	init_controls();
 	
-	/*
 	if(!init_background_video()){
 		$("video").hide();
 	}
-	*/
+	
 });
+
+/*
+	Map controls to DOM elements
+*/
+function init_controls(){    
+	$("#div_text").draggable({containment:"window", scroll:false}).zoomable();
+};
 
 /* Adjust with orientation data */
 function init_orientation() {
@@ -155,16 +161,6 @@ function CSS_zoom(selector, scale) {
 }
 
 
-
-/*
-	Map controls to DOM elements
-*/
-function init_controls(){    
-    
-	$("#div_text").draggable({containment:"window", scroll:false}).zoomable();
-};
-
-
 /*
 	Set background as input from camera.
 */
@@ -191,20 +187,9 @@ function init_background_video(){
 		
 		return true;
 	} else {
-		$("#infobar_text").text("getUserMedia not supported.").css("background","#FF6666");
-		console.warn("getUserMedia is not supported");
+		//$("#infobar_text").text("getUserMedia not supported.").css("background","#FF6666");
+		//console.warn("getUserMedia is not supported");
 		return false;
-	}
-}
-
-function dbug(debugging){
-	if(debugging){
-		$(".infobar").show();
-		$("#show_infobar").hide();
-	}
-	else{
-		$(".infobar").hide();
-		$("#show_infobar").show();
 	}
 }
 
@@ -278,7 +263,10 @@ function dbug(debugging){
 */
 function hasGetUserMedia(){return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);}
 
+/*Source: http://electron9.phys.utk.edu/vectors/3dcoordinates.htm */
 function cart_to_pol(x,y,z){ return [Math.pow((Math.pow(x,2) + Math.pow(y,2) + Math.pow(z,2)), 0.5), Math.atan2(z, Math.pow((Math.pow(x) + Math.pow(y)), .5)), Math.atan2(y, x)];}
+
+function dbug(debugging){if(debugging){$(".infobar").show();$("#show_infobar").hide();}else{$(".infobar").hide();$("#show_infobar").show();}}
 
 function round(val) {
 	//Round to nearest 0.5
