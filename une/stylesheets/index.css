@@ -1,0 +1,25 @@
+﻿#flashcards {
+    width:100%;
+}
+
+th, tr, td {
+    border: 1px solid black;
+}
+
+#headings {
+    background-color:lightskyblue;
+}
+
+.hidden {
+    background-color:black;
+}
+
+td:hover {
+    background-color:white;
+}
+
+tr:nth-child(odd) {
+    background-color: #EDF8FE;
+}
+
+}
