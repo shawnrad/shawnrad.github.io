@@ -2,23 +2,25 @@
 	On Ready
 */
 $(document).ready(function(){
+    
     initialize_db();
-
+    
     //Choose Flashcard set
     diseases = db["central_degeneration"]
-
+    
     //Fill table
     $.each(diseases, function (index, value) {
-        add_row(value)
+        add_row(value);
     });
-
+    
     //Add onclick to headings
-    $.each($("#headings").children(), function (index, value) {
-        $(value).click(set_visible_column($(value).attr('class')))
+    $.each($("#headings button"), function (index, value) {
+        $(value).click(function () {
+            set_visible_column($(value).text().toLowerCase().replace(" ", "_"));
+        });
     });
-
+    
     set_visible_column("disease");
-
 });
 
 function set_visible_column(class_name) {

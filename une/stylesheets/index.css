@@ -2,16 +2,16 @@
     width:100%;
 }
 
-th, tr, td {
+tr, td {
     border: 1px solid black;
 }
 
 #headings {
-    background-color:lightskyblue;
+    background-color: white;
 }
 
 .hidden {
-    background-color:black;
+   visibility:hidden;
 }
 
 td:hover {
