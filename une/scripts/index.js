@@ -2,14 +2,19 @@
 	On Ready
 */
 $(document).ready(function(){
-    initialize_table();
+    
 });
 
 
 function initialize_table() {
-    //Fetch JSON
-    //TODO: Open dialog box to allow user to paste CSV
-    db = generate_JSON();
+    //Clear previous table
+    $("#flashcards").empty().append($("<tr>").attr("id", "headings"))
+
+    //Convert from CSV to JSON
+    db = CSV_to_JSON($("#dialog_textarea").val());
+
+    //Dummy db
+    //db = generate_JSON();
 
     //Generate table from JSON
     initialize_from_JSON(db);
@@ -19,6 +24,9 @@ function initialize_table() {
 
     //Add table functionality 
     add_table_functions()
+
+    //Change to flashcards page
+    $(":mobile-pagecontainer").pagecontainer("change", "#flashcards_page");
 }
 
 function generate_JSON() {
@@ -37,6 +45,77 @@ function generate_JSON() {
     db["subjects"] = cd
 
     return db;
+}
+
+function csv_mend(fields) {
+    index = 0
+    while (index < fields.length) {
+        field = fields[index]
+        if (field.substr(0, 1) == '"') {
+            if (field.substr(field.length - 1, field.length) == '"') {
+                index += 1
+            }
+            else {
+                fields.splice(index,2,fields[index]+=(", "+fields[index + 1]))
+            }
+        }
+        else {
+            index+=1
+        }
+    }
+
+    return fields
+}
+
+function CSV_to_JSON(csv) {
+    /*
+    CSV is expected to be in the form:
+    HEADER1,HEADER2,HEADER3,...,HEADER_N
+    SUBJECT1,DATA_11,DATA21,...,DATA_N1
+    ,DATA_12,,...,DATA_N2
+    ...
+    ,DATA_N2,,...,DATA_NN
+    SUBJECT2,DATA_11,DATA21,...,DATA_N1
+    ...
+    */
+
+    lines = csv.split("\n")
+    headers = lines[0].split(",")
+
+    lst = []
+    data = {}
+    for (line_num = 1; line_num < lines.length; line_num++) {
+        fields = csv_mend(lines[line_num].split(","))
+
+        // If the first entry is a comma, then we continue adding this the current entry
+        if (fields[0] == "") {
+            $.each(fields, function (index, field) {
+                //Add if not empty
+                if (field != "") {
+                    data[headers[index]].push(field)
+                }
+            });
+        }
+        //Otherwise, we are adding a new entry
+        else {
+            if ( !( $.isEmptyObject(data) ) ) {
+                lst.push(data)
+            }
+            data = {}
+            $.each(fields, function (index, field) {
+                data[headers[index]] = [field]
+            });
+        }
+    }
+    //Don't forget to add final object
+    if (!$.isEmptyObject(data)) {
+        lst.push(data)
+    }
+
+    db = {}
+    db["subjects"] = lst
+    
+    return db
 }
 
 function initialize_from_JSON(db) {

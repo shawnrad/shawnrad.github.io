@@ -18,6 +18,15 @@ tr:nth-child(odd) {
     background-color: #EDF8FE;
 }
 
+#dialog_header h1{
+    margin:0;
+}
+
+#dialog_footer {
+    text-align:center;
+}
+
+/*
 .ui-dialog-contain {
 	width: 92.5%;
 	max-width: 500px;
@@ -26,3 +35,4 @@ tr:nth-child(odd) {
 	position: relative;
 	top: -15px;
 }
+*/

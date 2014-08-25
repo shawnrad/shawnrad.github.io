@@ -12,27 +12,31 @@
     <script src="scripts/libs/jquery-2.1.1.min.js"></script>
     <!--<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>-->
     <script src="scripts/libs/jquery.mobile-1.4.3.min.js"></script>
-    <script src="scripts/data.js"></script>
     <script src="scripts/index.js"></script>
 </head>
 <body>
-
-    <div data-role="page">
+    <div id="flashcards_page" data-role="page">
         <!--<div data-role="header"></div>-->
-        <div role="main" class="ui-content">
-            <table id="flashcards">
-                <tr id="headings">
-                    <!--<th><button class="ui-btn ui-corner-all">Disease</button></th>
-                    <th><button class="ui-btn ui-corner-all">Onset</button></th>
-                    <th><button class="ui-btn ui-corner-all">Pathology</button></th>
-                    <th><button class="ui-btn ui-corner-all">Presentation</button></th>
-                    <th><button class="ui-btn ui-corner-all">Medical Diagnostics</button></th>
-                    <th><button class="ui-btn ui-corner-all">Treatment</button></th>-->
-                </tr>
-            </table>
+        <div id="flashcards_main" role="main" class="ui-content">
+            <a href="#dialog_page" class="ui-shadow ui-btn ui-corner-all ui-btn-inline " data-transition="pop">Load CSV</a>
+            <table id="flashcards"></table>
         </div>
         <!--<div data-role="footer"></div>-->
     </div>
+
+    <div id="dialog_page" data-role="page" data-close-btn="none" data-dialog="true">
+        <div id="dialog_header" data-role="header" data-theme="b">
+            <h1>Paste comma-seperated-value (CSV) below</h1>
+        </div>
+
+        <div id="dialog_main" role="main" class="ui-content">
+                <textarea id="dialog_textarea" autofocus></textarea>
+        </div>
+
+        <div id="dialog_footer" data-role="footer" data-theme="b">
+            <input id ="CSV_submit" type="button" value="Enter" onclick="initialize_table()"></input>
+                <!--<a href="#flashcards_page" data-rel="back" class="ui-btn ui-corner-all">Enter</a>-->
+        </div>
 </body>
 </html>
 
