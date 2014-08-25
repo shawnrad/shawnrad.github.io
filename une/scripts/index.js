@@ -6,26 +6,73 @@ $(document).ready(function(){
 });
 
 
-function initialize_table() {
-    //Clear previous table
-    $("#flashcards").empty().append($("<tr>").attr("id", "headings"))
+function load_cookies() {
+    grid_letters = ['a', 'b', 'c']
+    grid = $("#cookie_grid").empty()
 
+    $.each(document.cookie.split(';'), function (index, cookie) {
+        name_value_pair = cookie.split("=")
+        table_name = name_value_pair[0].replace("_", " ")
+        if (table_name != " csrftoken") {
+            csv = decodeURI(name_value_pair[1])
+            grid.append($("<div>").addClass("ui-block-"+grid_letters[index%3])
+                    .append($("<button>").addClass("ui-btn")
+                        .addClass("ui-corner-all")
+                        .text(table_name)
+                        .css("textTransform", "capitalize")
+                        .click(function () {
+                            load_table_from_CSV(csv);
+                            //Change to flashcards page
+                            $(":mobile-pagecontainer").pagecontainer("change", "#flashcards_page");
+                        })
+                    )
+                )
+        }
+    });
+
+    $(":mobile-pagecontainer").pagecontainer("change", "#load_page");
+}
+
+function load_table_from_CSV(csv) {
     //Convert from CSV to JSON
-    db = CSV_to_JSON($("#dialog_textarea").val());
+    db = CSV_to_JSON(csv);
 
     //Dummy db
     //db = generate_JSON();
 
-    if (!(db["subjects"].length==0)) {
+    if ( db["subjects"].length > 0) {
+        //Clear previous table
+        $("#flashcards").empty().append($("<tr>").attr("id", "headings"))
+
         //Generate table from JSON
         initialize_from_JSON(db);
 
         //Set first column visible
-        set_visible_column(get_class_name(Object.keys(db["subjects"][0])[0]))
+        set_visible_column(get_class_name(Object.keys(db["subjects"][0])[0]));
 
         //Add table functionality 
-        add_table_functions()
+        add_table_functions();
     }
+}
+
+
+function load_table_from_txtarea() {
+    //Fetch csv
+    csv = $("#dialog_textarea").val()
+
+    if (csv != "") {
+        try {
+            load_table_from_CSV(csv)
+
+            if ($("#CSV_name").val() != "") {
+                set_cookie($("#CSV_name").val(), $("#dialog_textarea").val())
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
     //Change to flashcards page
     $(":mobile-pagecontainer").pagecontainer("change", "#flashcards_page");
 }
@@ -164,7 +211,7 @@ function add_row(subject) {
         // Assert "value" is a list
         value = [].concat(subject[key])
 
-        new_td = $("<td>").addClass(get_class_name(key))
+        new_td = $("<td>").addClass(get_class_name(key)).addClass("border")
         new_div = $("<div>").addClass(get_class_name(key))
         if (value.length == 1) {
             new_div.text(value)
@@ -185,7 +232,7 @@ function add_row(subject) {
 
 function add_table_functions(){
     //Add properties to table data (td)
-    $.each($("td"), function (index, value) {
+    $.each($("#flashcards td"), function (index, value) {
         //Add hover functionality to table
         $(value).hover(function () {
             //ON MOUSE ENTER
@@ -226,4 +273,14 @@ function set_visible_column(class_name) {
     //Clear headers & selected class_name
     $("th div").removeClass("hidden");
     $("." + class_name + " div").removeClass("hidden").addClass("lock_column")
+}
+
+function set_cookie(name, csv) {
+    //Set expiration date
+    var d = new Date();
+    exdays = 120; //Expires in 120 days
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+
+    document.cookie = get_class_name(name) + "=" + encodeURI(csv) + "; " + expires;
 }

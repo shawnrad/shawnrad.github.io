@@ -2,12 +2,12 @@
     width:100%;
 }
 
-tr, td {
-    border: 1px solid black;
+#flashcards #headings {
+    background-color: white;
 }
 
-#headings {
-    background-color: white;
+.border {
+    border: 1px solid black;
 }
 
 ul
@@ -25,16 +25,20 @@ li {
    visibility:hidden;
 }
 
-tr:nth-child(odd) {
+#flashcards tr:nth-child(odd) {
     background-color: #EDF8FE;
 }
 
-#dialog_header h1{
+#open_header h1, #load_header h1{
     margin:0;
 }
 
-#dialog_footer {
-    text-align:center;
+#open_footer_table{
+    width:100%;
+}
+
+#oft_td1 div {
+    text-align:right;
 }
 
 /*

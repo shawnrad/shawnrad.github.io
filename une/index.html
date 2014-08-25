@@ -18,25 +18,56 @@
     <div id="flashcards_page" data-role="page">
         <!--<div data-role="header"></div>-->
         <div id="flashcards_main" role="main" class="ui-content">
-            <a href="#dialog_page" class="ui-shadow ui-btn ui-corner-all ui-btn-inline " data-transition="pop">Load CSV</a>
+            <fieldset class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a href="#open_page" class="ui-shadow ui-btn ui-corner-all" data-transition="pop">Load CSV</a>
+                </div>
+                <div class="ui-block-b">
+                    <input id="load_page_btn" type="button" value="Load From Cookies" onclick="load_cookies()"></input>
+                    <!--<a href="#load_page" class="ui-shadow ui-btn ui-corner-all" data-transition="pop">Load Cookie</a>-->
+                </div>
+            </fieldset>
+
             <table id="flashcards"></table>
         </div>
         <!--<div data-role="footer"></div>-->
     </div>
 
-    <div id="dialog_page" data-role="page" data-close-btn="none" data-dialog="true">
-        <div id="dialog_header" data-role="header" data-theme="b">
+    <div id="open_page" data-role="page" data-dialog="true">
+        <div id="open_header" data-role="header" data-theme="b">
             <h1>Paste comma-seperated-value (CSV) below</h1>
         </div>
 
-        <div id="dialog_main" role="main" class="ui-content">
+        <div id="open_main" role="main" class="ui-content">
                 <textarea id="dialog_textarea" autofocus></textarea>
         </div>
 
-        <div id="dialog_footer" data-role="footer" data-theme="b">
-            <input id ="CSV_submit" type="button" value="Enter" onclick="initialize_table()"></input>
-                <!--<a href="#flashcards_page" data-rel="back" class="ui-btn ui-corner-all">Enter</a>-->
+        <div id="open_footer" data-role="footer" data-theme="b">
+            <table id="open_footer_table">
+                <tr>
+                    <td id="oft_td1"><div>Save as:</div></td>
+                    <td id="oft_td2"><input id="CSV_name" type="text" name="CSV_name"></input></td>
+                    <td id="oft_td3"><input id="CSV_submit" type="button" value="Enter" onclick="load_table_from_txtarea()"></input></td>
+                </tr>
+            </table>
+                
+            
         </div>
+    </div>
+
+    <div id="load_page" data-role="page" data-dialog="true">
+        <div id="load_header" data-role="header" data-theme="b">
+            <h1>Choose any of the topics below</h1>
+        </div>
+
+        <div id="load_main" role="main" class="ui-content">
+            <fieldset id="cookie_grid" class="ui-grid-b">
+            </fieldset>
+        </div>
+
+        <!--<div id="load_footer" data-role="footer" data-theme="b"></div>-->
+    </div>
+
 </body>
 </html>
 
