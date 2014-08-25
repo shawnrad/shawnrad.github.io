@@ -10,6 +10,17 @@ tr, td {
     background-color: white;
 }
 
+ul
+{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin: 1em 0;
+}
+
 .hidden {
    visibility:hidden;
 }

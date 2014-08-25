@@ -170,7 +170,7 @@ function add_row(subject) {
             new_div.text(value)
         }
         else {
-            new_dl = $("<dl>")
+            new_dl = $("<ul>")
             $.each(value, function (index, info) {
                 new_dl.append($("<li>").text(info))
             });
