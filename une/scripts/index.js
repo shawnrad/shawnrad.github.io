@@ -16,15 +16,16 @@ function initialize_table() {
     //Dummy db
     //db = generate_JSON();
 
-    //Generate table from JSON
-    initialize_from_JSON(db);
+    if (!(db["subjects"].length==0)) {
+        //Generate table from JSON
+        initialize_from_JSON(db);
 
-    //Set first column visible
-    set_visible_column(get_class_name(Object.keys(db["subjects"][0])[0]))
+        //Set first column visible
+        set_visible_column(get_class_name(Object.keys(db["subjects"][0])[0]))
 
-    //Add table functionality 
-    add_table_functions()
-
+        //Add table functionality 
+        add_table_functions()
+    }
     //Change to flashcards page
     $(":mobile-pagecontainer").pagecontainer("change", "#flashcards_page");
 }
