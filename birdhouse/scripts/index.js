@@ -6,9 +6,8 @@ $(document).ready(function(){
                   $("#description").addClass("hidden");
                   
                   
-                  $( "html" )
-                  .mousedown(showDescription)
-                  .mouseup(hideDescription);
+                  $( document ).on("vmousedown", "html", showDescription)
+                  .on("vmouseup","html",hideDescription);
 });
 
 function showDescription(event) {
