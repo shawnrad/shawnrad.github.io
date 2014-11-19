@@ -2,21 +2,24 @@
 	On Ready
 */
 $(document).ready(function(){
+	values = ["2","Dos"]
+	value = 0
 
-                  $("#description").addClass("hidden");
-                  
-                  
-                  $( document ).on("vmousedown", "html", showDescription)
-                  .on("vmouseup","html",hideDescription);
+	// //Set initial value
+	// //Portrait
+	// if (window.orientation % 180) == 0{
+	// 	value = 0
+	// }
+	// //Landscapre
+	// else{
+	// 	value = 1
+	// }
+	$("#card_text").text(values[value]);
+
+	$(window).bind('orientationchange', function() {
+   		value = (window.orientation%180 == 0) ? 0 : 1
+   		$("#card_text").text(values[value]);
+	});
+
+	
 });
-
-function showDescription(event) {
-    $("#text").addClass("blurry");
-    $("#description").removeClass("hidden");
-}
-
-function hideDescription(event) {
-    $("#text").removeClass("blurry");
-    $("#description").addClass("hidden");
-}
-
