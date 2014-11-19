@@ -2,5 +2,5 @@
 	On Ready
 */
 $(document).ready(function(){
-	 $('#makeMeDraggable').draggable();
+	//YOUR CODE HERE
 });

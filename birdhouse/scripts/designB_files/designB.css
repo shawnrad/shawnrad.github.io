@@ -27,6 +27,10 @@
     border-style: dashed;
 }
 
+#target.hover{
+    background: #aaa;
+}
+
 #description{
     bottom:-150px;
 
