@@ -8,7 +8,8 @@ $(document).ready(function(){
 		axis:"y",
 		scroll:"false",
 		cursor:"move",
-		revert:true
+		revert:true,
+		icons:{primary:"ui-icon-locked"}
 	});
 
 	$("#target").droppable({

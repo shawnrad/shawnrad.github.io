@@ -2,17 +2,17 @@
  
 #text, #description, #target{
   position:absolute;
-  left:40%;
+  left:30%;
 
   width: 400px;
-  height: 200px;
-  
+
   border: 2px solid #333;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
   
   background: #fff;
+  color: #000;
 
   font-size: 400%;
   text-align:center;
@@ -20,22 +20,33 @@
 
 #text{
     top:20px;   
+
+    height:200px;
 }
 
 #target{
-    top:240px;
+    top:290px;
+
+    height:300px;
+
     border-style: dashed;
 }
 
 #description{
+
+    height:300px;
+
     bottom:-150px;
-
-    background: #fff;
-    color: #000;
-
+    
     /*
       -moz-box-shadow: 0 0 .5em rgba(0, 0, 0, .8);
       -webkit-box-shadow: 0 0 .5em rgba(0, 0, 0, .8);
       box-shadow: 0 0 .5em rgba(0, 0, 0, .8);
     */
+}
+
+#description p{
+
+    position:relative;
+    top:34%;
 } 

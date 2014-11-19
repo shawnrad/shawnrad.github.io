@@ -9,7 +9,7 @@ html, body, {
 
 #text, #description{
     position:absolute;
-    top:50%;
+    top:40px;
     
     width:100%;
     text-align:center;
