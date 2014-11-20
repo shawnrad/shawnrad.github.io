@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 
-<!-- 
+<!--
 
-FLIP CARD TO VIEW ANSWER
-DONE!
+SLIDE ANSWER INTO PLACE
+DONE
 
 Source:
-http://jsfiddle.net/nicooprat/GDdtS/
+http://www.elated.com/articles/drag-and-drop-with-jquery-your-essential-guide/
 -->
+
 <html>
 <head>
 
 <!-- STYLE -->
 <link rel="stylesheet" type="text/css" href="stylesheets/jquery.mobile-1.4.5.min.css">
-<link rel="stylesheet" type="text/css" href="stylesheets/designA.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/designB.css">
 
 <!-- SCRIPTS -->
 <script src="scripts/jquery-1.11.1.min.js"></script>
 <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
-<script src="scripts/designA.js"></script>
+
+<script src="scripts/jquery-ui.min.js"></script>
+<script src="scripts/jquery.ui.touch-punch.min.js"></script>
+
+<script src="scripts/designF.js"></script>
 
 </head>
 <body>
 
 <div data-role="page">
-    
     <div data-role="header">
         <a id="backBtn" href="/index.html" data-rel="back" data-theme="b">Back</a>
     </div>
     
-    <div data-role="ui-content">
+    <div id="content" data-role="ui-content">
+    
+        <div id="text">
+            <p>2</p>
+        </div>
+        
+        <div id="target"></div>
 
-        <div class="flip"> 
-            <div class="card"> 
-                <div class="face front"> 
-                    2
-                </div> 
-                <div class="face back"> 
-                    Dos
-                </div> 
-            </div> 
+        <div id="description">
+            <p>Dos</p>
         </div>
 
         <div id="grading">
