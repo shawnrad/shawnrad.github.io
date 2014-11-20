@@ -1,6 +1,6 @@
 #card{
   position:absolute;
-  top:20px;
+  top:30px;
   left:30%;
 
   width: 400px;
@@ -20,6 +20,51 @@
 
 #card_text{
 
+}
+
+#grading{
+  position:absolute;
+  top:250px;
+  width:100%;
+}
+
+#correct, #incorrect{
+  position:absolute;
+  left:30%;
+
+  width: 180px;
+  height: 100px;
+
+  text-align:center;
+  font-size:xx-large;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+  border: 0px solid #333;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;  
+}
+
+#correct{
+  background:#80e6b2;
+  color:#339933;
+
+  margin-left:215px;
+}
+
+#correct:active{
+  color:#80e6b2;
+  background:#339933;
+}
+
+#incorrect{
+  background:#ffb9b9;
+  color:#ff0000;
+}
+
+#incorrect:active{
+  color:#ffb9b9;
+  background:#ff0000;
 }
 
 #backBtn{
