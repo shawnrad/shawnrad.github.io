@@ -8,7 +8,7 @@ $(document).ready(function(){
 	
 	$("#grading").hide()
 
-	$("#description").draggable({
+	$(".description").draggable({
 		axis:"y",
 		scroll:"false",
 		cursor:"move",
@@ -17,15 +17,13 @@ $(document).ready(function(){
 	});
 
 	$("#target").droppable({
-		accept: "#description",
+		accept: ".description",
 		hoverClass: 'hovered',
 		drop:handleCardDrop
 	});
 
 	$(document).on("vclick","#target",targetClick)
 
-    $(document).on("vclick","#correct",markIncorrect);
-    $(document).on("vclick","#incorrect",markCorrect);
 });
 
 function handleCardDrop( event, ui ) {
@@ -37,14 +35,16 @@ function handleCardDrop( event, ui ) {
     if(BUTTONS){
     	$("#grading").fadeIn(750);
     }
+
+    listenForSwipe()
 }
 
 function targetClick(event){
-	$("#description").css({
+	$(".description").css({
 		bottom:"-150px",
 		top:"auto"})
 		.animate({
-			bottom:($(window).height()-604 + "px")
+			bottom:($(window).height()-602 + "px")
 		},500,function(){
 			$(this).position({ 
 				of: $(this), 
@@ -59,33 +59,60 @@ function targetClick(event){
     if(BUTTONS){
     	$("#grading").delay(500).fadeIn(750);
     }
+
+    listenForSwipe();
 }
 
-function markIncorrect(event) {
-    nextCard()
+function listenForSwipe(){
+
+	$("#grading").fadeIn(150);
+
+    $('.cards').on("swipeleft",function() {
+
+        // $("#grading").fadeOut(500);
+
+        $(this).animate({
+            left: '-50%'
+        }, 500, function() {
+            $(this).css('left', '150%');
+            $(this).appendTo('#container');
+        });
+
+        $(this).next().animate({
+            left: '30%'
+        }, 500);
+
+        resetDragNDrop();
+        // $("#grading").hide();
+    });
+
+    $('.cards').on("swiperight",function() {
+
+        // $("#grading").fadeOut(500);
+
+        $(this).animate({
+            left: '150%'
+        }, 500, function() {
+            $(this).css('left', '150%');
+            $(this).appendTo('#container');
+        });
+
+        $(this).next().css('left',"-50%")
+            .animate({
+            left: '30%'
+        }, 500);
+
+        resetDragNDrop();
+        // $("#grading").hide();
+    });
+
 }
 
-function markCorrect(event) {
-    nextCard()
-}
+function resetDragNDrop(){
+    
+    $("#grading").fadeOut(100);
 
-function nextCard(){
-    
-    $("#grading").hide();
-
-    val = Math.floor(Math.random()*5);
-    $("#text").text(NUMBERS[val]);
- 
- 	/* Replace old description card*/
-    $("#description").remove();
-    p = document.createElement("p");
-    $(p).text(SPANISH[val]);
-    div = document.createElement("div");
-    $(div).attr("id","description").append(p)
-    $("#content").append(div);
-    
-    
- 	$("#description").draggable({
+ 	$(".description").draggable({
 		axis:"y",
 		scroll:"false",
 		cursor:"move",
@@ -93,4 +120,7 @@ function nextCard(){
 		icons:{primary:"ui-icon-locked"}
 	});
  	$("#target").droppable('enable');
+
+ 	$(".cards").off("swipeleft");
+ 	$(".cards").off("swiperight");
 }

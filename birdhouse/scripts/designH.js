@@ -5,7 +5,7 @@ BUTTONS = false;
 NUMBERS = ["0","1","2","3","4","5"]
 SPANISH = ["Cero","Uno","Dos","Tres","Quatro","Cinco"]
 VAL = 2
-rotateMe = false;
+rotateMe = true;
 $(document).ready(function(){
 
 	// //Set initial value
@@ -17,19 +17,28 @@ $(document).ready(function(){
 	// else{
 	// 	value = 1
 	// }
-	$("#card_text").text(NUMBERS[VAL]);
+
+	$(".back").hide();
+	$(".front").show();
 
 	$("#grading").hide();
 	$("#rotateMe_text").text("Rotate to see definition");
-
+	
 	$(window).bind('orientationchange', function() {
 		if(window.orientation%180 == 0){
-			$("#card_text").text( NUMBERS[VAL]);
+			$(".back").hide();
+			$(".front").show();
+
 			$("#rotateMe").hide();
+
+			allowGrading();
 			$("#grading").show();
 		}
 		else{
-			$("#card_text").text( SPANISH[VAL]);
+			$(".back").show();
+			$(".front").hide();
+
+			disallowGrading();
 			if (rotateMe){
 				$("#rotateMe_text").text("Rotate back for next card").
 				rotateMe = false;
@@ -37,22 +46,59 @@ $(document).ready(function(){
 		}
 	});
 
-    $(document).on("vclick","#correct",markIncorrect);
-    $(document).on("vclick","#incorrect",markCorrect);
 });
 
-function markIncorrect(event) {
-    nextCard()
+function allowGrading(){
+    $("#grading").show();
+
+
+    $('.cards').on("swipeleft",function() {
+
+        // $("#grading").fadeOut(500);
+
+        $(this).animate({
+            left: '-50%'
+        }, 500, function() {
+            $(this).css('left', '150%');
+            $(this).appendTo('#container');
+        });
+
+		$(".back").hide();
+		$(".front").show();
+
+        $(this).next().animate({
+            left: '30%'
+        }, 500);
+
+        // $("#grading").hide();
+    });
+
+    $('.cards').on("swiperight",function() {
+
+        // $("#grading").fadeOut(500);
+
+        $(this).animate({
+            left: '150%'
+        }, 500, function() {
+            $(this).css('left', '150%');
+            $(this).appendTo('#container');
+        });
+
+		$(".back").hide();
+		$(".front").show();
+
+        $(this).next().css('left',"-50%")
+            .animate({
+            left: '30%'
+        }, 500);
+
+        // $("#grading").hide();
+    });
 }
 
-function markCorrect(event) {
-    nextCard()
-}
-
-function nextCard(){
+function disallowGrading(){
     $("#grading").hide();
 
-    //Slight delay to hide answer
-    VAL = Math.floor(Math.random()*5);
-    $("#card_text").text(NUMBERS[VAL]);
+    $('.cards').off("swipeleft")
+    $('.cards').off("swiperight")
 }
