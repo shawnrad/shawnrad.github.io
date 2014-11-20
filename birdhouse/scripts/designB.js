@@ -20,7 +20,9 @@ $(document).ready(function(){
 		accept: "#description",
 		hoverClass: 'hovered',
 		drop:handleCardDrop
-	});
+	})
+
+	$(document).on("vclick","#target",targetClick)
 
     $(document).on("vclick","#correct",markIncorrect);
     $(document).on("vclick","#incorrect",markCorrect);
@@ -34,6 +36,28 @@ function handleCardDrop( event, ui ) {
 
     if(BUTTONS){
     	$("#grading").fadeIn(750);
+    }
+}
+
+function targetClick(event){
+	$("#description").css({
+		bottom:"-150px",
+		top:"auto"})
+		.animate({
+			bottom:($(window).height()-604 + "px")
+		},500,function(){
+			$(this).position({ 
+				of: $(this), 
+				my: 'left top', 
+				at: 'left top' })
+			.draggable( 'disable' )
+			.draggable( 'option', 'revert', false )		
+		});
+
+    $(this).droppable( 'disable' );
+
+    if(BUTTONS){
+    	$("#grading").delay(500).fadeIn(750);
     }
 }
 

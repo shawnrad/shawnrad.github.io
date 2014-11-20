@@ -5,6 +5,7 @@ BUTTONS = false;
 NUMBERS = ["0","1","2","3","4","5"]
 SPANISH = ["Cero","Uno","Dos","Tres","Quatro","Cinco"]
 VAL = 2
+rotateMe = false;
 $(document).ready(function(){
 
 	// //Set initial value
@@ -19,14 +20,20 @@ $(document).ready(function(){
 	$("#card_text").text(NUMBERS[VAL]);
 
 	$("#grading").hide();
+	$("#rotateMe_text").text("Rotate to see definition").
 
 	$(window).bind('orientationchange', function() {
 		if(window.orientation%180 == 0){
 			$("#card_text").text( NUMBERS[VAL]);
-			$("#grading").show()
+			$("#rotateMe").hide();
+			$("#grading").show();
 		}
 		else{
 			$("#card_text").text( SPANISH[VAL]);
+			if (rotateMe){
+				$("#rotateMe_text").text("Rotate back for next card").
+				rotateMe = false;
+			}
 		}
 	});
 
