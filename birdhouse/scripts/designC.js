@@ -45,7 +45,7 @@ function markCorrect(event) {
 }
 
 function nextCard(){
-	val = Math.floor(Math.random(5))
+	val = Math.floor(Math.random()*5)
 	$("#text").text(NUMBERS[val]);
  	$("#description").text(SPANISH[val]);
 }

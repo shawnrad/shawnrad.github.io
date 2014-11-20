@@ -47,4 +47,5 @@ function nextCard(){
 
     //Slight delay to hide answer
     VAL = Math.floor(Math.random()*5);
+    $("#card_text").text(NUMBERS[VAL]);
 }
