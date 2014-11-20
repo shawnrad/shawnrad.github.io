@@ -22,6 +22,7 @@ $(document).ready(function(){
 	$(".front").show();
 
 	$("#grading").hide();
+	
 	$("#rotateMe_text").text("Rotate to see definition");
 
 	$(window).bind('orientationchange', function() {
@@ -70,7 +71,7 @@ function allowGrading(){
             left: '30%'
         }, 500);
 
-        $("#grading").hide();
+        disallowGrading();
     });
 
     $('.cards').on("swiperight",function() {
@@ -92,7 +93,7 @@ function allowGrading(){
             left: '30%'
         }, 500);
 
-        $("#grading").hide();
+        disallowGrading();
     });
 }
 
