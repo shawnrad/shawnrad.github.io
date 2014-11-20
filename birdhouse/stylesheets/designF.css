@@ -1,0 +1,101 @@
+/* Individual cards and slots */
+ 
+#text, #description, #target{
+  position:absolute;
+  left:30%;
+
+  width: 400px;
+
+  border: 2px solid #333;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  
+  background: #fff;
+  color: #000;
+
+  font-size: 400%;
+  text-align:center;
+}
+
+#text{
+    top:30px;   
+
+    height:200px;
+}
+
+#target{
+    top:300px;
+
+    height:300px;
+
+    border-style: dashed;
+}
+
+#description{
+
+    height:300px;
+
+    bottom:-150px;
+    
+    /*
+      -moz-box-shadow: 0 0 .5em rgba(0, 0, 0, .8);
+      -webkit-box-shadow: 0 0 .5em rgba(0, 0, 0, .8);
+      box-shadow: 0 0 .5em rgba(0, 0, 0, .8);
+    */
+}
+
+#description p{
+
+    position:relative;
+    top:34%;
+} 
+
+#grading{
+  position:absolute;
+  top:620px;
+  width:100%;
+}
+
+#correct, #incorrect{
+  position:absolute;
+  left:30%;
+
+  width: 180px;
+  height: 100px;
+
+  text-align:center;
+  font-size:xx-large;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+  border: 0px solid #333;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;  
+}
+
+#correct{
+  background:#80e6b2;
+  color:#339933;
+
+  margin-left:215px;
+}
+
+#correct:active{
+  color:#80e6b2;
+  background:#339933;
+}
+
+#incorrect{
+  background:#ffb9b9;
+  color:#ff0000;
+}
+
+#incorrect:active{
+  color:#ffb9b9;
+  background:#ff0000;
+}
+
+#backBtn{
+    font-size:2em;
+}

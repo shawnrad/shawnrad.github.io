@@ -1,25 +1,68 @@
 /*
 	On Ready
 */
-BUTTONS = false;
+BUTTONS = true;
 NUMBERS = ["0","1","2","3","4","5"]
 SPANISH = ["Cero","Uno","Dos","Tres","Quatro","Cinco"]
 $(document).ready(function(){
 
-	$("#description").addClass("hidden");
+	$(".description").addClass("hidden");
 	$("#grading").hide()
 
 	$( document ).on("vmousedown", "html", showDescription)
 		.on("vmouseup","html",hideDescription);
 
-	$(document).on("vmouseup","#correct",markIncorrect);
-	$(document).on("vmouseup","#incorrect",markCorrect);
+	$(document).on("swipeleft",function() {
 
+        // $("#grading").fadeOut(500);
+        
+        $(".current").animate({
+            left: '-50%'
+        }, 500, function() {
+            $(this).css('left', '150%');
+            $(this).appendTo('#container');
+        });
+
+        next = $(".current").next(".card")
+        $(".current").removeClass("current");
+
+        next.addClass("current").animate({
+            left: '50%'
+        }, 500);
+
+
+        // $("#grading").hide();
+    });
+
+    $(document).on("swiperight",function() {
+        // $("#grading").fadeOut(500);
+
+        $(".current").animate({
+            left: '150%'
+        }, 500, function() {
+            $(this).css('left', '150%');
+            $(this).appendTo('#container');
+
+        });
+
+		next = $(".current").next(".card")
+        $(".current").removeClass("current");
+
+        next.addClass("current")
+        .css('left',"-50%")
+        .animate({
+            left: '50%'
+        }, 500);
+        // $("#grading").hide();
+    });
+    
 });
 
 function showDescription(event) {
-    $("#text").addClass("blurry");
-    $("#description").removeClass("hidden");
+    $(".text").addClass("blurry");
+    $(".description").removeClass("hidden");
+
+
 
     if(BUTTONS){
     	$("#grading").fadeIn(100);
@@ -28,24 +71,14 @@ function showDescription(event) {
 }
 
 function hideDescription(event) {
-    $("#text").removeClass("blurry");
-    $("#description").addClass("hidden");
+    $(".text").removeClass("blurry");
+    $(".description").addClass("hidden");
+
+
+	// $(document).off("swipeleft");
+ //    $(document).off("swiperight");
 
 	if(BUTTONS){
     	$("#grading").fadeOut(50);
     }    
-}
-
-function markIncorrect(event) {
-	nextCard()
-}
-
-function markCorrect(event) {
-	nextCard()
-}
-
-function nextCard(){
-	val = Math.floor(Math.random()*5)
-	$("#text").text(NUMBERS[val]);
- 	$("#description").text(SPANISH[val]);
 }
