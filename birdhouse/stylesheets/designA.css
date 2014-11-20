@@ -46,3 +46,7 @@ body {
     border-color:black;
     cursor: pointer;
 }
+
+#backBtn{
+    font-size:2em;
+}

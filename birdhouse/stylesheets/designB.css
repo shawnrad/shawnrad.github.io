@@ -50,3 +50,7 @@
     position:relative;
     top:34%;
 } 
+
+#backBtn{
+    font-size:2em;
+}
