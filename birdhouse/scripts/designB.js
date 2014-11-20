@@ -74,7 +74,7 @@ function nextCard(){
     $("#grading").hide();
 
     val = Math.floor(Math.random()*5);
-    $("#text").text(NUMBERS[val]);
+    $("#text").children("p").text(NUMBERS[val]);
  
  	/* Replace old description card*/
     $("#description").remove();

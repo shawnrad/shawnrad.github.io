@@ -19,7 +19,7 @@ html, body, {
     width: 50%;
     height: 300px;
     line-height: 300px;
-    font-size: 50px;
+    font-size: 600%;
     text-align: center;
     left: 150%;
     top: 100px;
@@ -45,6 +45,7 @@ html, body, {
 }
 
 .description{
+    margin-top:15px;
     z-index:1;
 }
 
