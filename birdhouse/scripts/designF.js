@@ -112,12 +112,16 @@ function resetDragNDrop(){
     
     $("#grading").fadeOut(100);
 
- 	$(".description").draggable({
-		axis:"y",
-		scroll:"false",
-		cursor:"move",
-		revert:true,
-		icons:{primary:"ui-icon-locked"}
+ 	$(".description").css({
+            top:"",
+            bottom:"-150px"
+        }).draggable({
+    		disabled:false,
+            axis:"y",
+    		scroll:"false",
+    		cursor:"move",
+    		revert:true,
+    		icons:{primary:"ui-icon-locked"}
 	});
  	$("#target").droppable('enable');
 

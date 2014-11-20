@@ -113,21 +113,11 @@
   color:#339933;
 }
 
-#correct:active{
-  color:#80e6b2;
-  background:#339933;
-}
-
 #incorrect{
   left:10px;
 
   background:#ffb9b9;
   color:#ff0000;
-}
-
-#incorrect:active{
-  color:#ffb9b9;
-  background:#ff0000;
 }
 
 #backBtn{
