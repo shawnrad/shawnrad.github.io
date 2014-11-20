@@ -20,7 +20,7 @@ $(document).ready(function(){
 	$("#card_text").text(NUMBERS[VAL]);
 
 	$("#grading").hide();
-	$("#rotateMe_text").text("Rotate to see definition").
+	$("#rotateMe_text").text("Rotate to see definition");
 
 	$(window).bind('orientationchange', function() {
 		if(window.orientation%180 == 0){
