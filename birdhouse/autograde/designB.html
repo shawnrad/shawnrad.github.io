@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+
+<!--
+
+SLIDE ANSWER INTO PLACE
+DONE
+
+Source:
+http://www.elated.com/articles/drag-and-drop-with-jquery-your-essential-guide/
+-->
+
+<html>
+<head>
+
+<!-- STYLE -->
+<link rel="stylesheet" type="text/css" href="../stylesheets/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" type="text/css" href="../stylesheets/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/designB.css">
+
+<!-- SCRIPTS -->
+<script src="../scripts/jquery-1.11.1.min.js"></script>
+<script src="../scripts/jquery.mobile-1.4.5.min.js"></script>
+
+<script src="../scripts/jquery-ui.min.js"></script>
+<script src="../scripts/jquery.ui.touch-punch.min.js"></script>
+
+<script src="scripts/designB.js"></script>
+
+</head>
+<body>
+
+<div data-role="page">
+    <div data-role="header">
+        <form>
+            <input id="easyMode"type="checkbox" name="checkbox-mini-0" data-mini="true">
+            <label for="easyMode">Easy Mode</label>
+        </form>
+    </div>
+    
+    <div id="content" data-role="ui-content">
+    
+        <div id="term">
+            <p id="term_text"></p>
+        </div>
+        
+        <div id="definition">
+            <div id="multichoice" class="ui-grid-a">
+                <div class="ui-block-a"><button id="option1" class="option" data-theme="a"></button></div>
+                <div class="ui-block-b"><button id="option2" class="option" data-theme="a"></button></div>
+                <div class="ui-block-a"><button id="option3" class="option" data-theme="a"></button></div>
+                <div class="ui-block-b"><button id="option4" class="option" data-theme="a"></button></div>
+            </div><!-- End multichoice -->
+            
+
+            <div id="truefalse">
+                <p id="truefalse_text"></p>
+                <div data-role="controlgroup" data-type="horizontal">                
+                    <button id="optionTrue" class="option" data-theme="a">True</button>
+                    <button id="optionFalse" class="option" data-theme="a">False</button>
+                </div>
+            </div><!-- End truefalse -->
+
+        </div><!-- End definition-->
+
+    </div><!-- End content -->
+    
+    <!--
+    <div data-role="footer">
+        <h4>Footer content</h4>
+    </div>
+     -->
+    
+</div><!-- end 'page' -->
+</body>
+</html>
