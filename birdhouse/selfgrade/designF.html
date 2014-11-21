@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<!--
+
+SLIDE ANSWER INTO PLACE
+DONE
+
+Source:
+http://www.elated.com/articles/drag-and-drop-with-jquery-your-essential-guide/
+-->
+
+<html>
+<head>
+
+<!-- STYLE -->
+<link rel="stylesheet" type="text/css" href="../stylesheets/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" type="text/css" href="../stylesheets/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/designF.css">
+
+<!-- SCRIPTS -->
+<script src="../scripts/jquery-1.11.1.min.js"></script>
+<script src="../scripts/jquery.mobile-1.4.5.min.js"></script>
+
+<script src="../scripts/jquery-ui.min.js"></script>
+<script src="../scripts/jquery.ui.touch-punch.min.js"></script>
+
+<script src="scripts/designF.js"></script>
+
+</head>
+<body>
+
+<div data-role="page">
+    <div data-role="header">
+        <a id="backBtn" href="/index.html" data-rel="back" data-theme="b">Back</a>
+    </div>
+    
+    <div id="content" data-role="ui-content">
+    
+        <div id="container">
+            <div id="uno" class="cards">
+                <div class="text"><p>1</p></div>
+                <div class="description"><p>Uno</p></div>
+            </div>
+            <div id="dos" class="cards">
+                <div class="text"><p>2</p></div>
+                <div class="description"><p>Dos</p></div>
+            </div>
+            <div id="tres" class="cards">
+                <div class="text"><p>3</p></div>
+                <div class="description"><p>Tres</p></div>
+            </div>
+            <div id="cuatro" class="cards">
+                <div class="text"><p>4</p></div>
+                <div class="description"><p>Cuatro</p></div>
+            </div>
+            <div id="cinco" class="cards">
+                <div class="text"><p>5</p></div>
+                <div class="description"><p>Cinco</p></div>
+            </div>
+        </div>
+
+        <div id="target"></div>
+
+        <div id="grading">
+            <div id="correct" ><p>I was right</p></div>
+            <div id="incorrect"><p>I was wrong</p></div>
+        </div>
+    </div><!-- /content -->
+    
+    <!--
+    <div data-role="footer">
+        <h4>Footer content</h4>
+    </div>
+     -->
+    
+</div><!-- end 'page' -->
+</body>
+</html>
