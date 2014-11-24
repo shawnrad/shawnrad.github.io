@@ -14,29 +14,12 @@
 
 }
 
-#truefalse_text{
-    font-size: 5em;
-}
-
-.option{
-    margin:0px;
-
-    font-size:6em;
-}
-
-#optionTrue{
-
-}
-#optionFalse{
-
-}
-
 .correct{
-    background:#80e6b2 
+    background:#80e6b2 !important
 }
 
 .incorrect{
-    background:#ffb9b9
+    background:#ffb9b9 !important
 }
 
 .hidden{

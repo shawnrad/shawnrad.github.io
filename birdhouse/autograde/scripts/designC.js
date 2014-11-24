@@ -6,23 +6,25 @@ SPANISH = ["Cero","Uno","Dos","Tres","Cuatro","Cinco"]
 current_term = 0;
 easyMode = false;
 $(document).ready(function(){
-    setTest();
+    $('#spinner').mobiscroll().select({
+        theme: 'android-ics light',
+        display: 'inline',
+        mode: 'scroller'
+    });
 
-    $('#easyMode').prop("checked",false)
-        .change(function(){
-            if ($(this).prop("checked") ){
-                easyMode = true;
-            }
-            else{
-                easyMode = false;
-            }
-            setTF();
-        });
-    
+    /*Cleanup spinner weirdness*/
+    $("#spinner-button").hide();
+    $("#spinner_dummy").hide();
+    $(".dw").css("width","100%");
+
+    setTest();
 });
 
 function setTest(){
     
+    /*Remove stylings*/
+    $(".dw-li").removeClass("correct").removeClass("incorrect");
+
     /*Get new term*/
     old_term = current_term
     do{
@@ -37,5 +39,17 @@ function setTest(){
 function checkSubmission(){
     answer = SPANISH[current_term];
 
-    setTimeout(setTest, 750)
+    submission = SPANISH[$("#spinner").val()-1]
+
+    if(answer == submission){
+        $(".dw-sel").addClass("correct");
+    } else {
+        $(".dw-sel").addClass("incorrect");
+    }
+
+    setTimeout(setTest, 500)
 }
+
+$(function(){
+
+});

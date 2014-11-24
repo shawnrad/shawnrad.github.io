@@ -63,6 +63,8 @@ function setTest(){
     /*Clear formatting*/
     $(".option").removeClass("completed")
         .prop("disabled",false);
+    selected = null;
+    selectedID = null;
 
     
     //Shuffle order

@@ -2,7 +2,7 @@
 
 <!--
 Spinner match up
-
+DONE
 -->
 
 <html>
@@ -11,6 +11,7 @@ Spinner match up
 <!-- STYLE -->
 <link rel="stylesheet" type="text/css" href="../stylesheets/jquery.mobile-1.4.5.min.css">
 <link rel="stylesheet" type="text/css" href="../stylesheets/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="css/mobiscroll.custom-2.6.2.min.css">
 <link rel="stylesheet" type="text/css" href="stylesheets/designC.css">
 
 <!-- SCRIPTS -->
@@ -18,7 +19,8 @@ Spinner match up
 <script src="../scripts/jquery.mobile-1.4.5.min.js"></script>
 
 <script src="../scripts/jquery-ui.min.js"></script>
-<script src="../scripts/jquery.ui.touch-punch.min.js"></script>
+<script src="js/mobiscroll.custom-2.6.2.min.js"></script>
+
 
 <script src="scripts/designC.js"></script>
 
@@ -26,12 +28,12 @@ Spinner match up
 <body>
 
 <div data-role="page">
-    <div data-role="header">
+    <!-- <div data-role="header">
         <form>
             <input id="easyMode"type="checkbox" name="checkbox-mini-0" data-mini="true">
             <label for="easyMode">Easy Mode</label>
         </form>
-    </div>
+    </div> -->
     
     <div id="content" data-role="ui-content">
     
@@ -40,9 +42,16 @@ Spinner match up
         </div>
         
         <div id="definition">
-            ADD SPINNER
+            <select name="Answer" id="spinner">
+                <option value="1">Cero</option>
+                <option value="2">Uno</option>
+                <option value="3">Dos</option>
+                <option value="4">Tres</option>
+                <option value="5">Cuatro</option>
+                <option value="6">Cinco</option>
+            </select>
         </div><!-- End definition-->
-        </br> 
+
         <button id="submitBtn" onclick="checkSubmission()">Submit</button>
 
     </div><!-- End content -->
