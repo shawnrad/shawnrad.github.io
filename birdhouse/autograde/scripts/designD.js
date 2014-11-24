@@ -33,11 +33,15 @@ function setCompleted(id){
         .removeClass("correct")
         .addClass("completed")
 
+        //Unselect
+        selected = null;
+        selectedID = null;
+
         if( $(".completed").size() == (NUMBERS.length)*2){
         setTest()
     }
     },
-    500);
+    200);
 }
 
 function setIncomplete(id){
@@ -45,9 +49,13 @@ function setIncomplete(id){
 
     setTimeout(function(){
         $("#"+id).removeClass("selected")
-        .removeClass("incorrect")
+        .removeClass("incorrect");
+
+        //Unselect
+        selected = null;
+        selectedID = null;
     },
-    500);
+    200);
 }
 
 function setTest(){
