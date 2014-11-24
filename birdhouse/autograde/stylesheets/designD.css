@@ -1,5 +1,17 @@
 .option{
     margin:0px;
 
-    font-size:5em;
+    font-size:3em;
+}
+
+.selected{
+	background:#0099ff !important;
+}
+
+.correct{
+    background:#80e6b2 !important;
+}
+
+.incorrect{
+    background:#ffb9b9 !important;
 }

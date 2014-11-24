@@ -14,16 +14,16 @@
 .letter{
     width:1em;
 
-    margin:20px;
+    margin:5px;
 
     color:white;
     background-color:#D0D0D0;
 
-    font-size:7em;
+    font-size:5em;
     text-align:center;
     font-family:monospace;
 
-    margin:20px;
+    
     border: 1px solid;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
