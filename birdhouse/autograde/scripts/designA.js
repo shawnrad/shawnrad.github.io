@@ -3,7 +3,7 @@
 	On Ready
 */
 NUMBERS = ["0","1","2","3","4","5"]
-SPANISH = ["cero","uno","dos","tres","uatro","cinco"]
+SPANISH = ["cero","uno","dos","tres","cuatro","cinco"]
 current_term = 0;
 easyMode = false;
 $(document).ready(function(){
